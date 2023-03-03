@@ -1,10 +1,13 @@
-﻿string[,] cadastro = new string[5, 4];
+﻿string[,] cadastro = new string[5, 7];
 int i;
 int coluna = 0;
 int menu;
+double[] notas = new double[5];
+double[] faltas = new double[5];
 string voltar = "S";
 string voltar2 = "s";
 string pesquisa = " ";
+string decisao = "";
 
 Console.WriteLine("  Ola! \n Cadastre os nomes, numeros de faltas e aulas dos alunos!  \n");
 
@@ -17,52 +20,49 @@ for (i = 0; i < 5; i++)
     cadastro[i, coluna++] = Console.ReadLine();
     Console.WriteLine("Qual o numero de aulas dadas? \n");
     cadastro[i, coluna++] = Console.ReadLine();
-
-    coluna = 0;
+    Console.WriteLine("Qual a nota da 1° prova? \n");
+    cadastro[i, coluna++] = Console.ReadLine();
+    Console.WriteLine("Qual a nota da 2º prova? \n");
+    cadastro[i, coluna++] = Console.ReadLine();
+    Console.WriteLine("Qual a nota da 3º prova? \n");
+    cadastro[i, coluna++] = Console.ReadLine();
+    Console.WriteLine("Qual a nota do trabalho? \n");
+    cadastro[i, coluna++] = Console.ReadLine();
 }
 
-while (voltar == "S" || voltar == "s")
+Console.Clear();
+
+for (i = 0; i < 5; i++)
 {
-    Console.Clear();
-
-    Console.WriteLine(" Oque gostaria de fazer agora? \n");
-    Console.WriteLine();
-    Console.WriteLine(" Digite: \n '1' para: lista de alunos. \n '2' para pesquisar alunos. ");
-
-    menu = int.Parse(Console.ReadLine());
-
-    switch (menu)
+    notas[i] = (double.Parse(cadastro[i, 3]) * 30 / 100) + (double.Parse(cadastro[i, 4]) * 25 / 100) + (double.Parse(cadastro[i, 5]) * 30 / 100);
+    if (double.Parse(cadastro[i, 6]) >= 6)
     {
-        case 1:
-            {
-                Console.Clear();
-                Console.WriteLine(" Lista de alunos... \n");
-                Console.WriteLine();
-
-                for (i = 0; i <= 4; i++)
-                {
-                    Console.Write(" Aluno: " + cadastro[i, 0] + " " + cadastro[i, 1] + ", numero de faltas: " + cadastro[i, 2] + ", numero de faltas do aluno: ");
-                    Console.WriteLine();
-                    Console.WriteLine();
-                }
-            }
-                break;
-            
-        case 2:
-            {
-                while (voltar == "S" || voltar == "s")
-                {
-                    Console.Clear();
-                    Console.WriteLine(" Informe o nome do aluno que deseja pesquisar: ");
-                    pesquisa = Console.ReadLine();
-                    Console.WriteLine();
-                    Console.WriteLine();
-
-                    for (i = 0; i <= 4; i++)
-                    { }
-                }
-
-            }
-            break;
+        notas[i]++;
     }
+    faltas[i] = double.Parse(cadastro[i, 1]) * 25 / 100;
+}
+
+for (i = 0; i < 4; i++)
+
+{
+    if (notas[i] >= 6 && double.Parse(cadastro[i, 2]) <= faltas[i])
+    {
+        decisao = " APROVADO!  \n";
+    }
+    if (notas[i] >= 6 && double.Parse(cadastro[i, 2]) > faltas[i])
+    {
+        decisao = " REPROVADO POR FALTAS!  \n";
+    }
+    if (notas[i] >= 6 && double.Parse(cadastro[i, 2]) <= faltas[i])
+    {
+        decisao = " REPROVADO POR NOTAS!  \n";
+    }
+    if (notas[i] >= 6 && double.Parse(cadastro[i, 2]) > faltas[i])
+    {
+        decisao = " REPROVADO EM AMBAS INSTÂNCIAS!  \n";
+    }
+
+    Console.Write(" Aluno: " + cadastro[i, 0] + ", foi: " + decisao);
+    Console.WriteLine("");
+    Console.WriteLine("");
 }
