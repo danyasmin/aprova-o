@@ -13,6 +13,7 @@ Console.WriteLine("  Ola! \n Cadastre os nomes, numeros de faltas e aulas dos al
 
 for (i = 0; i < 5; i++)
 {
+    coluna = 0;
     Console.Clear();
     Console.WriteLine("Nome do aluno \n");
     cadastro[i, coluna++] = Console.ReadLine();
@@ -39,25 +40,25 @@ for (i = 0; i < 5; i++)
     {
         notas[i]++;
     }
-    faltas[i] = double.Parse(cadastro[i, 1]) * 25 / 100;
+    faltas[i] = double.Parse(cadastro[i, 2]) * 25 / 100;
 }
 
-for (i = 0; i < 4; i++)
+for (i = 0; i < 5; i++)
 
 {
-    if (notas[i] >= 6 && double.Parse(cadastro[i, 2]) <= faltas[i])
+    if (notas[i] >= 6 && double.Parse(cadastro[i, 1]) <= faltas[i])
     {
         decisao = " APROVADO!  \n";
     }
-    if (notas[i] >= 6 && double.Parse(cadastro[i, 2]) > faltas[i])
+    if (notas[i] >= 6 && double.Parse(cadastro[i, 1]) > faltas[i])
     {
         decisao = " REPROVADO POR FALTAS!  \n";
     }
-    if (notas[i] >= 6 && double.Parse(cadastro[i, 2]) <= faltas[i])
+    if (notas[i] >= 6 && double.Parse(cadastro[i, 1]) <= faltas[i])
     {
         decisao = " REPROVADO POR NOTAS!  \n";
     }
-    if (notas[i] >= 6 && double.Parse(cadastro[i, 2]) > faltas[i])
+    if (notas[i] >= 6 && double.Parse(cadastro[i, 1]) > faltas[i])
     {
         decisao = " REPROVADO EM AMBAS INSTÂNCIAS!  \n";
     }
